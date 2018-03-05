@@ -4,7 +4,7 @@ CREATE TABLE Organization(
     fullName  VARCHAR (50) NOT NULL,
     inn       INTEGER NOT NULL,
     kpp       INTEGER NOT NULL,
-    adress    VARCHAR(50) NOT NULL,
+    address    VARCHAR(50) NOT NULL,
     phone     INTEGER NOT NULL,
     isActive  TRUE
 );
@@ -13,7 +13,7 @@ CREATE TABLE Office(
   id      INTEGER PRIMARY KEY AUTO_INCREMENT,
   orgId   INTEGER NOT NULL,
   name    VARCHAR(50) NOT NULL,
-  adress  VARCHAR(50) NOT NULL,
+  address  VARCHAR(50) NOT NULL,
   phone   INTEGER NOT NULL,
   isActive TRUE
 )
@@ -27,6 +27,7 @@ CREATE TABLE Worker(
   phone INTEGER NOT NULL,
   docName VARCHAR(50) NOT NULL,
   docNumber INTEGER NOT NULL,
+  docDate VARCHAR(50) NOT NULL,
   docCode INTEGER NOT NULL,
   citezenshipName VARCHAR(50) NOT NULL,
   citezenshipCode INTEGER NOT NULL,
