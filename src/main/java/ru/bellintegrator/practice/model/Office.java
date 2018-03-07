@@ -1,5 +1,16 @@
 package ru.bellintegrator.practice.model;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 import java.util.List;
 
 @Entity
@@ -14,24 +25,24 @@ public class Office {
     @Version
     private Integer version;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "orgid")
-    private Organization organization;
-
     @Basic (optional = false)
-    @Column (name = "name")
+    @Column (name = "name", length = 600)
     private String name;
 
     @Basic (optional = false)
-    @Column (name = "address")
+    @Column (name = "address", length = 1000)
     private String address;
 
     @Basic (optional = false)
-    @Column (name = "phone")
-    private int phone;
+    @Column (name = "phone", length = 16)
+    private String phone;
 
-    @Column (name = "isActive")
+    @Column (name = "is_active")
     private boolean isActive;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "orgid")
+    private Organization organization;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "worker", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Worker> workers;
@@ -39,7 +50,7 @@ public class Office {
     public Office(){
 
     }
-    public Office (long id, String name, String address, int phone, boolean isActive){
+    public Office (long id, String name, String address, String phone, boolean isActive){
         this.id = id;
         this.name = name;
         this.address = address;
@@ -82,10 +93,10 @@ public class Office {
         this.address = address;
     }
 
-    public int getPhone(){
+    public String getPhone(){
         return phone;
     }
-    public void setPhone(int phone){
+    public void setPhone(String phone){
         this.phone = phone;
     }
 

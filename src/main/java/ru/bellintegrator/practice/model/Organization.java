@@ -1,5 +1,14 @@
 package ru.bellintegrator.practice.model;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 import java.util.List;
 
 @Entity
@@ -15,30 +24,30 @@ public class Organization {
     private Integer version;
 
     @Basic (optional = false)
-    @Column (name = "name")
+    @Column (name = "name", length = 140)
     private String name;
 
     @Basic (optional = false)
-    @Column (name = "fullName")
+    @Column (name = "full_name", length = 600)
     private String fulleName;
 
     @Basic(optional = false)
-    @Column(name = "inn")
-    private int inn;
+    @Column(name = "inn", length = 12) //у юр лиц 10 знаков в инн; у ип 12
+    private String inn;
 
     @Basic(optional = false)
-    @Column(name = "kpp")
-    private int kpp;
+    @Column(name = "kpp", length = 9)
+    private String kpp;
 
     @Basic (optional = false)
-    @Column (name = "address")
+    @Column (name = "address", length = 1000)
     private String address;
 
     @Basic (optional = false)
-    @Column (name = "phone")
-    private int phone;
+    @Column (name = "phone", length = 16)
+    private String phone;
 
-    @Column (name = "isActive")
+    @Column (name = "is_active")
     private boolean isActive;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -47,7 +56,7 @@ public class Organization {
     public Organization(){
 
     }
-    public Organization(String name, String fullName, int inn, int kpp, String address, int phone, boolean isActive){
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive){
         this.name = name;
         this.fulleName = fullName;
         this.inn = inn;
@@ -97,17 +106,17 @@ public class Organization {
         this.fulleName = fulleName;
     }
 
-    public int getInn (){
+    public String getInn (){
         return inn;
     }
-    public void setInn(int inn){
+    public void setInn(String inn){
         this.inn = inn;
     }
 
-    public int getKpp(){
+    public String getKpp(){
         return kpp;
     }
-    public void setKpp(int kpp){
+    public void setKpp(String kpp){
         this.kpp = kpp;
     }
 
@@ -118,10 +127,10 @@ public class Organization {
         this.address = address;
     }
 
-    public int getPhone(){
+    public String getPhone(){
         return phone;
     }
-    public void setPhone(int phone){
+    public void setPhone(String phone){
         this.phone = phone;
     }
 

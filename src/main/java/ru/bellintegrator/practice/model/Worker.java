@@ -8,7 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Worker")
@@ -18,63 +19,64 @@ public class Worker {
     @Column(name = "Id")
     private Long id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "officeId")
-    private Worker worker;
-
     @Basic (optional = false)
-    @Column (name = "firstName")
+    @Column (name = "first_name", length = 140)
     private String firstName;
 
     @Basic (optional = false)
-    @Column (name = "lastName")
+    @Column (name = "last_name", length = 140)
     private String lastName;
 
     @Basic (optional = false)
-    @Column (name = "middleName")
+    @Column (name = "middle_name", length = 140)
     private String middleName;
 
     @Basic (optional = false)
-    @Column (name = "position")
+    @Column (name = "position", length = 280)
     private String position;
 
     @Basic (optional = false)
-    @Column (name = "phone")
-    private int phone;
+    @Column (name = "phone", length = 16)
+    private String phone;
 
     @Basic (optional = false)
-    @Column (name = "docName")
+    @Column (name = "doc_name", length = 240)
     private String docName;
 
     @Basic (optional = false)
-    @Column (name = "docNumber")
+    @Column (name = "doc_number", length = 140)
     private int docNumber;
 
     @Basic (optional = false)
-    @Column (name = "docDate")
+    @Column (name = "doc_date")
+    @Temporal(TemporalType.DATE)
     private String docDate;
 
     @Basic (optional = false)
-    @Column (name = "docCode")
+    @Column (name = "doc_code", length = 2)
     private int docCode;
 
     @Basic (optional = false)
-    @Column (name = "citizenshipName")
+    @Column (name = "citizenship_name", length = 140)
     private String citizenshipName;
 
     @Basic (optional = false)
-    @Column (name = "citizenshipCode")
+    @Column (name = "citizenship_code", length = 6)
     private int citizenshipCode;
 
     @Basic (optional = false)
-    @Column (name = "isIdentified")
+    @Column (name = "is_identified")
     private boolean isIdentified;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "office_id")
+    private Worker worker;
 
     public Worker(){
 
     }
 
-    public Worker(long id, String firstName, String lastName, String middleName, String position, int phone, String docName,
+    public Worker(long id, String firstName, String lastName, String middleName, String position, String phone, String docName,
                   int docNumber, String docDate, String citizenshipName, int citizenshipCode, boolean isIdentified){
         this.id = id;
         this.firstName = firstName;
@@ -152,10 +154,10 @@ public class Worker {
         this.position = position;
     }
 
-    public int getPhone(){
+    public String getPhone(){
         return phone;
     }
-    public void setPhone(int phone){
+    public void setPhone(String phone){
         this.phone = phone;
     }
 

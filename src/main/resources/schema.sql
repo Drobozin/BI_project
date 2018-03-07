@@ -1,64 +1,47 @@
 CREATE TABLE Organization(
     id        INTEGER PRIMARY KEY AUTO_INCREMENT,
     name      VARCHAR (50) NOT NULL,
-    fullName  VARCHAR (50) NOT NULL,
-    inn       INTEGER NOT NULL,
-    kpp       INTEGER NOT NULL,
+    full_name  VARCHAR (50) NOT NULL,
+    inn       VARCHAR(50) NOT NULL,
+    kpp       VARCHAR(50) NOT NULL,
     address    VARCHAR(50) NOT NULL,
-    phone     INTEGER NOT NULL,
-    isActive  TRUE
+    phone     VARCHAR(50) NOT NULL,
+    is_active  TRUE
 );
 
 CREATE TABLE Office(
   id      INTEGER PRIMARY KEY AUTO_INCREMENT,
-  orgId   INTEGER NOT NULL,
+  org_id   INTEGER NOT NULL,
   name    VARCHAR(50) NOT NULL,
   address  VARCHAR(50) NOT NULL,
-  phone   INTEGER NOT NULL,
-  isActive TRUE
+  phone   VARCHAR(50) NOT NULL,
+  is_active TRUE
 )
 CREATE TABLE Worker(
   id      INTEGER PRIMARY KEY AUTO_INCREMENT,
-  officeId INTEGER NOT NULL,
-  firstName VARCHAR(50) NOT NULL,
-  lastNAme VARCHAR(50) NOT NULL,
-  middleName VARCHAR(50),
+  office_id INTEGER NOT NULL,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  middle_name VARCHAR(50),
   position VARCHAR(50) NOT NULL,
-  phone INTEGER NOT NULL,
-  docName VARCHAR(50) NOT NULL,
-  docNumber INTEGER NOT NULL,
-  docDate VARCHAR(50) NOT NULL,
-  docCode INTEGER NOT NULL,
-  citezenshipName VARCHAR(50) NOT NULL,
-  citezenshipCode INTEGER NOT NULL,
-  isIdentified TRUE
+  phone VARCHAR(50) NOT NULL,
+  doc_name VARCHAR(50) NOT NULL,
+  doc_number INTEGER NOT NULL,
+  doc_date VARCHAR(50) NOT NULL,
+  doc_code VARCHAR(50) NOT NULL,
+  citezenship_name VARCHAR(50) NOT NULL,
+  citezenship_code INTEGER NOT NULL,
+  is_identified TRUE
 )
 
-CREATE TABLE Docs(
+CREATE TABLE doc_type(
   id    INTEGER PRIMARY  KEY AUTO_INCREMENT,
   name  VARCHAR(50) NOT NULL,
   code  INTEGER NOT NULL
 )
 
-CREATE TABLE Countries(
+CREATE TABLE Country(
   id    INTEGER PRIMARY KEY AUTO_INCREMENT,
   name  VARCHAR (50) NOT NULL,
   code  INTEGER NOT NULL
 )
-
-/*CREATE TABLE IF NOT EXISTS Person (
-    id         INTEGER  PRIMARY KEY AUTO_INCREMENT,
-    version    INTEGER NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    house_id   INTEGER,
-    age        INTEGER  NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS House (
-    id         INTEGER  PRIMARY KEY AUTO_INCREMENT,
-    version    INTEGER NOT NULL,
-    address    VARCHAR(50) NOT NULL
-);
-
-CREATE INDEX IX_Person_House_Id ON Person (house_id);
-ALTER TABLE Person ADD FOREIGN KEY (house_id) REFERENCES House(id);*/
