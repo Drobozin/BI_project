@@ -1,15 +1,6 @@
 package ru.bellintegrator.practice.model;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "Worker")
@@ -40,21 +31,13 @@ public class Worker {
     private String phone;
 
     @Basic (optional = false)
-    @Column (name = "doc_name", length = 240)
-    private String docName;
-
-    @Basic (optional = false)
     @Column (name = "doc_number", length = 140)
     private int docNumber;
 
     @Basic (optional = false)
     @Column (name = "doc_date")
     @Temporal(TemporalType.DATE)
-    private String docDate;
-
-    @Basic (optional = false)
-    @Column (name = "doc_code", length = 2)
-    private int docCode;
+    private java.util.Date docDate;
 
     @Basic (optional = false)
     @Column (name = "citizenship_name", length = 140)
@@ -72,19 +55,22 @@ public class Worker {
     @JoinColumn (name = "office_id")
     private Worker worker;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "doc_type", joinColumns = @JoinColumn(name = "name"), inverseJoinColumns = @JoinColumn(name = "code") )
+    private DocType docType;
+
     public Worker(){
 
     }
 
-    public Worker(long id, String firstName, String lastName, String middleName, String position, String phone, String docName,
-                  int docNumber, String docDate, String citizenshipName, int citizenshipCode, boolean isIdentified){
+    public Worker(long id, String firstName, String lastName, String middleName, String position, String phone,
+                  int docNumber, java.util.Date docDate, String citizenshipName, int citizenshipCode, boolean isIdentified){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.position = position;
         this.phone = phone;
-        this.docName = docName;
         this.docNumber = docNumber;
         this.docDate = docDate;
         this.citizenshipName = citizenshipName;
@@ -106,8 +92,6 @@ public class Worker {
         builder.append(getPosition());
         builder.append(";phone:");
         builder.append(getPhone());
-        builder.append(";docName:");
-        builder.append(getDocName());
         builder.append(";docNumber:");
         builder.append(getDocNumber());
         builder.append(";docDate:");
@@ -161,10 +145,6 @@ public class Worker {
         this.phone = phone;
     }
 
-    public String getDocName(){
-        return docName;
-    }
-
     public int getDocNumber(){
         return docNumber;
     }
@@ -172,10 +152,10 @@ public class Worker {
         this.docNumber = docNumber;
     }
 
-    public String getDocDate() {
+    public java.util.Date getDocDate() {
         return docDate;
     }
-    public void setDocDate(String docDate) {
+    public void setDocDate(java.util.Date docDate) {
         this.docDate = docDate;
     }
 

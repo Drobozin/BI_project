@@ -30,9 +30,11 @@ public class Organization {
     @Basic (optional = false)
     @Column (name = "full_name", length = 600)
     private String fulleName;
-
+    /**
+     * у юр лиц 10 знаков в инн; у ип 12
+     */
     @Basic(optional = false)
-    @Column(name = "inn", length = 12) //у юр лиц 10 знаков в инн; у ип 12
+    @Column(name = "inn", length = 12)
     private String inn;
 
     @Basic(optional = false)
